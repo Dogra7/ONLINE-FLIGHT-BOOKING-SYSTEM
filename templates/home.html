@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOME</title>
+    <!-- Add Bootstrap CSS link -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-image: url("/static/p.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .home {
+        text-align: center;
+        color: rgb(0, 0, 0);
+      }
+
+      .main {
+        position: absolute;
+        width: 30%;
+        top: 55%;
+        left: 81%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        background-color: rgb(253, 193, 114);
+        padding: 20px;
+      }
+
+      .title {
+        margin-top: 2%;
+        margin-left: 1%;
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        border-radius: 12px;
+        /*border: 1px solid white;*/
+        background-color: rgb(253, 193, 114);
+        padding: 10px;
+      }
+
+      .book button {
+        font-family: verdana;
+        width: 100%;
+        height: 50px;
+        border-radius: 12px;
+        background-color: rgb(255, 255, 208);
+      }
+
+      .book button:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      .book button:active {
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <h1>FLIGHT BOOKING SYSTEM</h1>
+      </div>
+      <div class="home">
+        <div class="main">
+          <br />
+          <div class="book">
+            <h1>WELCOME TO FLIGHT BOOKING SYSTEM</h1>
+            <br /><br />
+            <form method="post">
+              <button type="submit" class="btn btn-warning" name="booking">
+                FLIGHT RESERVATION
+              </button>
+              <br /><br />
+              <button type="submit" class="btn btn-warning" name="trains">
+                FLIGHT SCHEDULE
+              </button>
+            </form>
+            <br /><br /><br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+body{
+    background-image: url("t.jpg");
+    background-size: cover;
+   }
+
+h1{
+    width: 300px;
+    border: 7px solid white;
+    background-color: antiquewhite;
+    padding: 40px;
+    margin: 10px;
+margin-left: 12%;
+color: red;
+text-align:center;
+border-radius: 12px;
+
+
+}
+.home button{
+    
+    margin-top: 1%;
+    font-family: verdana;
+    width: 40%;
+    height: 50px;
+    border-radius: 12px;
+    padding: 14px 40px;
+    background-color:antiquewhite;
+}
+.home button:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.home button:active{
+    
+    
+    transform: translateY(4px);
+}

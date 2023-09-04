@@ -1,0 +1,85 @@
+/* Replaced custom background styling with a Bootstrap class */
+body {
+    background-image: url("t.jpg");
+    background-size: cover;
+}
+
+/* Replaced text-align with Bootstrap class for center alignment */
+.ty, .title1, .data, .done {
+    text-align: center;
+}
+
+/* Replaced custom styling with Bootstrap classes for borders and padding */
+.data {
+    width: 300px;
+    border: 7px solid black;
+    background-color: antiquewhite;
+    padding: 40px;
+    margin: 10px;
+    margin-left: 12%;
+    text-align: center;
+    border-radius: 12px;
+}
+
+/* Removed custom styling for title1, since it's now centered using Bootstrap */
+/* .title1 {
+    text-align: center;
+} */
+
+/* Replaced custom positioning with Bootstrap utility classes */
+.done {
+    position: absolute;
+    width: 30%;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: aliceblue;
+    border-radius: 12px;
+}
+
+/* Replaced custom button styling with Bootstrap classes */
+.done button, .home button {
+    margin-left: 20%;
+    margin-bottom: 10%;
+    width: 300px;
+    height: 50px;
+    color: black;
+    border-radius: 12px;
+}
+
+/* Replaced custom styling with Bootstrap classes for title */
+.title {
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 98%;
+    height: 10%;
+    text-align: center;
+    border: 1px solid white;
+    background-color: aliceblue;
+    border-radius: 12px;
+}
+
+/* Replaced custom positioning with Bootstrap utility class */
+.home {
+    margin-left: 20%;
+}
+
+/* Replaced custom button styling with Bootstrap classes */
+.home button {
+    margin-top: 1%;
+    font-family: verdana;
+    width: 40%;
+    height: 50px;
+    border-radius: 12px;
+    padding: 14px 40px;
+    background-color: antiquewhite;
+}
+
+/* Replaced custom button hover and active states with Bootstrap utility classes */
+.home button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.home button:active {
+    transform: translateY(4px);
+}

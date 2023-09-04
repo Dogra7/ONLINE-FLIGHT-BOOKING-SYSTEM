@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH TRAINS</title>
+    <link rel="stylesheet" href="/static/searchtrains.css">
+</head>
+<body>
+    
+<div class = "title">
+    <h1> RAILWAY RESERVATION SYSTEM </h1>
+</div>
+
+<form method="post">
+<div class="abc">
+    <input type="text" id="origin" name="origin" value="{{ session['origin']|default('  ') }}"  placeholder="FROM">
+    <input type="text" id="input_fld" name="input_fld" value="{{ session['input_fld']|default('') }}" placeholder="DESTINATION">
+    <button type="avl_trn" name="avl_trn"><a>AVAILABLE TRAINS</a></button>
+</div>
+
+<div class="main">
+  
+ {% if msg %}
+ <p><h1>{{ msg }}</h1></p>
+
+   
+{% elif message %}
+    <div class="msg">
+    <div class="mg"><p><h1>{{ message }}</h1></p></div>
+</div> 
+<div class="home">
+<button type="home" name="home"><a>HOME</a></button>
+</div>
+{% else %}
+<div  class="tbl">
+<table style="background-color: rgb(255, 255, 255)"  border="1" width="100%">
+    <thead>
+        <tr>
+            <th>train_no</th>
+            <th>train_name</th>
+            <th>origin</th>
+            <th>dept_time</th>
+            <th>destination</th>
+            <th>arr_time</th>
+            <th>route_no</th>
+            <th>schedule</th>
+            <th>avail_seats</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody >
+
+            {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
+            <td>{{ row[8] }}</td>
+            <td>{{ row[9] }}</td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+        <div class="book">
+        <button type="ticket" name="ticket"><a>BOOK TICKET</a></button>
+    </div>
+    <div class="home">
+        <button type="home" name="home"><a href="http://127.0.0.1:5000/">HOME</a></button>
+         </div>
+        {% endif %}
+   
+
+
+</div>
+</form>
+
+<script src="/static/msg.js"></script>
+
+
+    
+</body>
+</html>
