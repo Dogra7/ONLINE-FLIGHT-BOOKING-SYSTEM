@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRAIN SCHEDULE</title>
+    <title>FLIGHT SCHEDULE</title>
     <link rel="stylesheet" href="/static/trains.css">
 </head>
 <body>
     <div class = "title">
-        <h1> RAILWAY RESERVATION SYSTEM </h1>
+        <h1> FLIGHT BOOKING SYSTEM </h1>
     </div>
     <div class="main">
     <div  class="tbl">
     <table style="background-color: rgb(255, 255, 255)" border="1" width="100%">
         <thead>
             <tr>
-                <th>train_no</th>
-                <th>train_name</th>
+                <th>plane_no</th>
+                <th>company</th>
                 <th>origin</th>
                 <th>dept_time</th>
                 <th>destination</th>
                 <th>arr_time</th>
-                <!-- <th>route_no</th> -->
                 <th>schedule</th>
                 <th>avail_seats</th>
                 
@@ -39,10 +38,9 @@
                 <td>{{ row[3] }}</td>
                 <td>{{ row[4] }}</td>
                 <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
                 <td>{{ row[7] }}</td>
-                <!-- <td>{{ row[7] }}</td> -->
-                <td>{{ row[8] }}</td>
-                <td>{{ row[9] }}</td>
+
             </tr>
             {% endfor %}
         </tbody>

@@ -7,15 +7,15 @@ from sqlalchemy.orm import sessionmaker
 app = Flask(__name__)
 app.secret_key = "deep"
 
-engine = create_engine("postgresql://postgres:deep1234@localhost:5432/RAILWAY RESERVATION")
+engine = create_engine("postgresql://postgres:deep1234@localhost:5432/FLIGHT BOOKING")
 Session = sessionmaker(bind=engine)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:deep1234@localhost:5432/RAILWAY RESERVATION"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:deep1234@localhost:5432/FLIGHT BOOKING"
 
 db = SQLAlchemy(app)
 
 con = psycopg2.connect(
-    database="RAILWAY RESERVATION",
+    database="FLIGHT BOOKING",
     user="postgres",
     password="deep1234",
     host="127.0.0.1",
@@ -62,24 +62,24 @@ def test():
 
     if avl and frm:
         cursor.execute(
-            "SELECT * from trains WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY train_name ASC",(avl,frm,),)
+            "SELECT * from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_name ASC",(avl,frm,),)
         result = cursor.fetchall()
-        cursor.execute("SELECT train_name from trains WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY train_name ASC",(avl,frm,),)
+        cursor.execute("SELECT plane_nm from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_nm ASC",(avl,frm,),)
         trains = cursor.fetchall()
     elif avl:
-        cursor.execute("SELECT * from trains WHERE destination ILIKE %s AND avail_seats > 0 ORDER BY train_no ASC",(avl,),)
+        cursor.execute("SELECT * from planes WHERE destination ILIKE %s AND avail_seats > 0 ORDER BY plane_no ASC",(avl,),)
         result = cursor.fetchall()
-        cursor.execute("SELECT train_name from trains WHERE destination ILIKE %s AND avail_seats > 0", (avl,))
+        cursor.execute("SELECT plane_nm from planes WHERE destination ILIKE %s AND avail_seats > 0", (avl,))
         trains = cursor.fetchall()
     elif frm:
-        cursor.execute("SELECT * from trains WHERE origin ILIKE %s AND avail_seats > 0 ORDER BY train_no ASC", (frm,))
+        cursor.execute("SELECT * from planes WHERE origin ILIKE %s AND avail_seats > 0 ORDER BY plane_no ASC", (frm,))
         result = cursor.fetchall()
-        cursor.execute("SELECT train_name from trains WHERE origin ILIKE %s AND avail_seats > 0", (frm,))
+        cursor.execute("SELECT plane_nm from planes WHERE origin ILIKE %s AND avail_seats > 0", (frm,))
         trains = cursor.fetchall()
     else:
         result = ""
 
-    cursor.execute("SELECT * FROM trains ORDER BY train_no ASC")
+    cursor.execute("SELECT * FROM planes ORDER BY plane_no ASC")
     all = cursor.fetchall()
     if request.method == "POST":
 
