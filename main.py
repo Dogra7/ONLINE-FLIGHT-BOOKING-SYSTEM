@@ -39,9 +39,10 @@ class Passenger(db.Model):
     seat_no = db.Column(db.Integer)
     dt = db.Column(db.Date)
     tm = db.Column(db.Time)
+    flight_n= db.column(db.Integer)
   
 
-    def __init__(self, name, number, p_class, from_dest, to_dest, airways, seat_no, dt, tm):
+    def __init__(self, name, number, p_class, from_dest, to_dest, airways, seat_no, dt, tm, flight_n):
         self.name = name
         self.number = number
         self.p_class= p_class
@@ -51,6 +52,7 @@ class Passenger(db.Model):
         self.seat_no = seat_no
         self.dt = dt 
         self.tm = tm
+        self.flight_n = flight_n
         
 
 @app.route("/", methods=["post"])
@@ -93,9 +95,11 @@ def test():
             session.setdefault = ("origin", "")
 
         if "ticket" in request.form:
+            flight_n = request.form.get("flight_n")
+            session["selected_number"] = flight_n
             airways = request.form.get("airways")
-            session["selected_train"] = airways
-            return render_template("booking.html", airways=airways)
+            session["selected_flight"] = airways
+            return render_template("booking.html", airways=airways, flight_n=flight_n)
         
         if "home" in request.form:
             return render_template("home.html")
@@ -132,8 +136,9 @@ def test():
     seat_no = request.form["seats"]
     airways = request.form["aiways"]
     p_class = request.form["p_class"]
+    flight_n = request.form["flight_n"] 
 
-    passenger = Passenger(name, number, from_dest, to_dest, dt, seat_no, airways, p_class)
+    passenger = Passenger(name, number, from_dest, to_dest, dt, seat_no, airways, p_class, flight_n)
     db.session.add(passenger)
     db.session.commit()
 
@@ -147,9 +152,10 @@ def test():
             result.dt,
             result.seat_no,
             result.airways,
-            result.p_class
+            result.p_class,
+            result.flight_n
         )
-    plane_n=request.form.get('train_name')    
+    plane_n=request.form.get('flight_n')    
     requested_seats= int(request.form.get('seats'))
     cursor.execute("SELECT avail_seats FROM planes WHERE plane_no = %s", (plane_n,))
     
@@ -160,7 +166,7 @@ def test():
          cursor.execute("UPDATE planes SET avail_seats = avail_seats - %s WHERE plane_no = %s",(requested_seats, plane_n),)
          con.commit()
          return render_template(
-            "done.html", data=(name, from_dest, to_dest, dt, seat_no, airways)
+            "done.html", data=(name, from_dest, to_dest, dt, seat_no, airways, p_class, flight_n)
          )
         else:
             return render_template("error.html")

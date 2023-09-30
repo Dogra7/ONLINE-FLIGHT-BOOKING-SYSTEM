@@ -66,9 +66,11 @@
               <div class="field">
                 <!-- <input type="number" id="train_no" name="train_no" placeholder="TRAIN NO"> -->
                 
-                <input type="number" value="1" id="seats" name="seats" placeholder="SEAT NO" readonly hidden>
+                <input type="number" value="1" id="seats" name="seats" placeholder="SEAT" readonly hidden>
                 <br>  
                 <input type="text" name="airways" value="{{airways}}" readonly>
+                <input type="number" name="flight_n" value="{{flight_n}}" readonly>
+
                 <!-- <select id="train_name" name="train_name">
                   {% for train in trains %}
                     <option value="{{ train[0] }}">{{ train[0] }}</option>
