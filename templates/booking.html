@@ -11,7 +11,7 @@
   <body>
     <div class="main">
       <div class="title">
-        <h1> RAILWAY RESERVATION SYSTEM </h1>
+        <h1> FLIGHT BOOKING SYSTEM </h1>
       </div>
       <div class="container">
         <div class="left">
@@ -45,7 +45,7 @@
 
 
               <div class="field">
-               TRAIN INFO:  
+               FLIGHT INFO:  
                 <input type="text" pattern="[A-Za-z]+" name="fromstation" id="from"
                   placeholder="FROM" required onclick="setFrom()">
               </div>
@@ -55,17 +55,25 @@
                   placeholder="TO"
                   required onclick="setTo()">
               </div>
+              <div class="field">
+                <select id="p_class" name="p_class" id="p_class">
+                  
+                    <option value="BUSINESS CLASS">BUSINESS CLASS</option>
+                    <option value="ECONOMY CLASS">ECONOMY CLASS</option>
 
+                </select>
+                </div>
               <div class="field">
                 <!-- <input type="number" id="train_no" name="train_no" placeholder="TRAIN NO"> -->
                 
-                <input type="number" min="1" id="seats" name="seats" placeholder="SEATS" required>
-                <br>
-                <select id="train_name" name="train_name">
+                <input type="number" value="1" id="seats" name="seats" placeholder="SEAT NO" readonly hidden>
+                <br>  
+                <input type="text" name="airways" value="{{airways}}" readonly>
+                <!-- <select id="train_name" name="train_name">
                   {% for train in trains %}
                     <option value="{{ train[0] }}">{{ train[0] }}</option>
                   {% endfor %}
-                </select>
+                </select> -->
               </div>
 
 
@@ -94,52 +102,29 @@
 
         <div class="right">
           <div class="map">
-            <img src="/static/a.png" usemap="#deep" height="962px"
-              width="862px">
-            <map name="deep">
-            <area id="DAHANU"           class="stn"     coords="158,35,174,50"      shape="rect">
-            <area id="VASAI"            class="stn"     coords="157,197,173,215"    shape="rect">
-            <area id="BORIVLI"          class="stn"     coords="152,292,173,304"    shape="rect">
-            <area id="ANDHERI"          class="stn"     coords="143,389,171,402"    shape="rect">
-            <area id="VERSOVA"          class="stn"     coords="59,388,75,404"      shape="rect"> 
-            <area id="BANDRA"           class="stn"     coords="144,469,173,482"    shape="rect">
-            <area id="DADAR W"          class="stn"     coords="151,629,170,645"    shape="rect">
-            <area id="DADAR C"          class="stn"     coords="172,645,190,665"    shape="rect">
-            <area id="CHURCHGATE"       class="stn"     coords="115,870,137,883"    shape="rect">
-            <area id="MUMBAI CSMT"      class="stn"     coords="152,855,190,869"    shape="rect">
-            <area id="WADALA"           class="stn"     coords="263,664,284,678"    shape="rect">
-            <area id="MUMBAI CENTRAL"   class="stn"     coords="112,760,133,777"    shape="rect">
-            <area id="KURLA"            class="stn"     coords="289,532,314,559"    shape="rect">
-            <area id="VASHI"            class="stn"     coords="417,536,432,557"    shape="rect">
-            <area id="GHATKOPAR"        class="stn"     coords="339,480,357,496"    shape="rect">
-            <area id="DIVA"             class="stn"     coords="530,368,546,389"    shape="rect">
-            <area id="NERUL"            class="stn"     coords="452,603,473,616"    shape="rect"> 
-            <area id="PANVEL"           class="stn"     coords="623,715,639,730"    shape="rect"> 
-            <area id="KHARGHAR"         class="stn"     coords="509,670,516,675"    shape="rect"> 
-            <area id="URAN"             class="stn"     coords="370,831,383,845"    shape="rect">
-            <area id="KALYAN"           class="stn"     coords="630,374,644,395"    shape="rect">
-            <area id="KHOPOLI"          class="stn"     coords="693,819,708,833"    shape="rect">
-            <area id="KARJAT"           class="stn"     coords="768,715,781,730"    shape="rect"> 
-            <area id="KASARA"           class="stn"     coords="788,226,803,241"    shape="rect">
-            <area id="THANE"            class="stn"     coords="437,385 443,379 465,398 456,409 "    shape="polygon">
-            <area id="BELAPUR CBD"      class="stn"     coords="490,647,496,654" shape="rect">
-            <area id="SEAWOODS"         class="stn"     coords="469,627,473,631" shape="rect">
-            <area id="MANSAROVAR"       class="stn"     coords="531,691,535,696" shape="rect">
-            <area id="KHANDESHWAR"      class="stn"     coords="553,711,557,719" shape="rect">
-            <area id="JUI NAGAR"        class="stn"     coords="459,578,475,582" shape="rect">
-            <area id="SANPADA"          class="stn"     coords="449,540,455,555" shape="rect">
-            <area id="CHEMBUR"          class="stn"     coords="351,547,359,557" shape="rect">
-            <area id="BADLAPUR"         class="stn"     coords="772,508,778,514" shape="rect">
-            <area id="AMBARNATH"        class="stn"     coords="759,464,764,469" shape="rect">
-            <area id="DOMBIVLI"         class="stn"     coords="575,369,583,377" shape="rect">
-            <area id="GOREGAON"         class="stn"     coords="155,354,161,357" shape="rect">
-            <area id="VIRAR"            class="stn"     coords="163,165,170,172" shape="rect">
-            <area id="VILE PARLE"       class="stn"     coords="142,411,162,418" shape="rect">
-            <area id="SANTACRUZ"        class="stn"     coords="142,430,162,434" shape="rect">
-            <area id="NERAL"            class="stn"     coords="772,644,778,650" shape="rect">
-            <area id="AIROLI"           class="stn"     coords="467,414,474,422" shape="rect">
-            <area id="GHANSOLI"         class="stn"     coords="467,465,475,474" shape="rect">
-
+            <img src="/static/a.png" usemap="#image_map">
+            <map name="image_map">
+              <area class="stn" id="csmt" coords="379,587,399,603" shape="rect">
+              <area class="stn" id="goa"  coords="409,709,431,731" shape="rect">
+                <area class="stn" id="cochin"  coords="493,885,507,898" shape="rect">
+                  <area class="stn" id="salem"  coords="545,831,566,847" shape="rect">
+                    <area class="stn" id="Vadodara"  coords="392,473,409,493" shape="rect">
+                      <area class="stn" id="sardar vallabh bhai patel"  coords="375,452,388,463" shape="rect">
+                      <area class="stn" id="biju patnaik"  coords="796,544,812,564" shape="rect">
+                      <area class="stn" id="lal bahadur shastri"  coords="700,365,720,381" shape="rect">
+                      <area class="stn" id="gaya"  coords="766,391,788,407" shape="rect">
+                      <area class="stn" id="jodhpur"  coords="384,336,404,349" shape="rect">
+                      <area class="stn" id="tribhuvan"  coords="782,285,800,301" shape="rect">
+                      <area class="stn" id="jaipur"  coords="473,313,490,332" shape="rect">
+                      <area class="stn" id="hindustan aeronautics"  coords="533,792,553,809" shape="rect">
+                      <area class="stn" id="tripura"  coords="945,425,960,437" shape="rect">
+                      <area class="stn" id="indira gandhi int"  coords="515,253,538,270" shape="rect">
+                      <area class="stn" id="trivandrum"  coords="511,939,526,951" shape="rect">
+                      <area class="stn" id="shimla"  coords="513,157,535,176" shape="rect">
+                      <area class="stn" id="kullu"  coords="517,125,538,147" shape="rect">
+                      <area class="stn" id="jammu"  coords="441,94,461,117" shape="rect">
+                      <area class="stn" id="srinagar"  coords="438,48,461,65" shape="rect">
+                      <area class="stn" id="leh"  coords="529,39,548,60" shape="rect">
             
             </map>
           </div>

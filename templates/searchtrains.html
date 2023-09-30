@@ -17,7 +17,7 @@
 <div class="abc">
     <input type="text" id="origin" name="origin" value="{{ session['origin']|default('  ') }}"  placeholder="FROM">
     <input type="text" id="input_fld" name="input_fld" value="{{ session['input_fld']|default('') }}" placeholder="DESTINATION">
-    <button type="avl_trn" name="avl_trn"><a>AVAILABLE TRAINS</a></button>
+    <button type="avl_trn" name="avl_trn"><a>AVAILABLE FLIGHTS</a></button>
 </div>
 
 <div class="main">
@@ -46,6 +46,7 @@
             <th>arr_time</th>
             <th>schedule</th>
             <th>avail_seats</th>
+            <th>Action</th> <!-- New column for the "Book Train" buttons -->
             
             
         </tr>
@@ -62,16 +63,20 @@
             <td>{{ row[5] }}</td>
             <td>{{ row[6] }}</td>
             <td>{{ row[7] }}</td>
-
+            
+            <td>
+                <form method="post"> <!-- Make sure the action attribute points to the correct route -->
+                    <input type="hidden" name="airways" value="{{ row[0] }}">
+                    <button type="submit" name="ticket" class="book-button">Book</button>
+                </form>
+            </td>
         </tr>
         
         {% endfor %}
     </tbody>
     </table>
 </div>
-        <div class="book">
-        <button type="ticket" name="ticket"><a>BOOK TICKET</a></button>
-    </div>
+
     <div class="home">
         <button type="home" name="home"><a href="http://127.0.0.1:5000/">HOME</a></button>
          </div>

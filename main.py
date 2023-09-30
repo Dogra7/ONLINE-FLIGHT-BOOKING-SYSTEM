@@ -26,28 +26,32 @@ cursor = con.cursor()
 @app.route("/")
 def home():
     return render_template("home.html")
-    #  return 'Hello, World!!!'
 
 class Passenger(db.Model):
     __tablename__ = "Passengers"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40))
     number = db.Column(db.Integer)
-    fromstation = db.Column(db.String(40))
-    tostation = db.Column(db.String(40))
+    p_class = db.Column(db.String(40))
+    from_dest = db.Column(db.String(40))
+    to_dest = db.Column(db.String(40))
+    airways = db.Column(db.String(40))
+    seat_no = db.Column(db.Integer)
     dt = db.Column(db.Date)
-    seats = db.Column(db.Integer)
-    train_name = db.Column(db.String(40))
+    tm = db.Column(db.Time)
+  
 
-    def __init__(self, name, number, fromstation, tostation, dt, seats, train_name):
+    def __init__(self, name, number, p_class, from_dest, to_dest, airways, seat_no, dt, tm):
         self.name = name
         self.number = number
-        self.fromstation = fromstation
-        self.tostation = tostation
-        self.dt = dt
-
-        self.seats = seats
-        self.train_name = train_name
+        self.p_class= p_class
+        self.from_dest = from_dest
+        self.to_dest = to_dest
+        self.airways = airways
+        self.seat_no = seat_no
+        self.dt = dt 
+        self.tm = tm
+        
 
 @app.route("/", methods=["post"])
 def test():
@@ -64,18 +68,12 @@ def test():
         cursor.execute(
             "SELECT * from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_name ASC",(avl,frm,),)
         result = cursor.fetchall()
-        cursor.execute("SELECT plane_nm from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_nm ASC",(avl,frm,),)
-        trains = cursor.fetchall()
     elif avl:
         cursor.execute("SELECT * from planes WHERE destination ILIKE %s AND avail_seats > 0 ORDER BY plane_no ASC",(avl,),)
         result = cursor.fetchall()
-        cursor.execute("SELECT plane_nm from planes WHERE destination ILIKE %s AND avail_seats > 0", (avl,))
-        trains = cursor.fetchall()
     elif frm:
         cursor.execute("SELECT * from planes WHERE origin ILIKE %s AND avail_seats > 0 ORDER BY plane_no ASC", (frm,))
         result = cursor.fetchall()
-        cursor.execute("SELECT plane_nm from planes WHERE origin ILIKE %s AND avail_seats > 0", (frm,))
-        trains = cursor.fetchall()
     else:
         result = ""
 
@@ -95,8 +93,10 @@ def test():
             session.setdefault = ("origin", "")
 
         if "ticket" in request.form:
-            return render_template("booking.html", trains=trains)
-
+            airways = request.form.get("airways")
+            session["selected_train"] = airways
+            return render_template("booking.html", airways=airways)
+        
         if "home" in request.form:
             return render_template("home.html")
 
@@ -110,29 +110,30 @@ def test():
 
             if len(result) == 0:
 
-                message = "TRAINS NOT AVAILABLE"
+                message = "FLIGHTS NOT AVAILABLE"
                 return render_template("searchtrains.html", message=message)
             else:
                 return render_template("searchtrains.html", data=result)
-
+    
         # Get the form data
         # train_name = request.form["train_name"]
         # num_seats = request.form["seats"]
-
+    
         # Update the available seats in the 'Trains' table
         # cursor.execute("UPDATE Trains SET avail_seats = avail_seats - %s WHERE train_name = %s",(num_seats, train_name),)
-
+    
         # Commit the changes to the database
         
     name = request.form["name"]
     number = request.form["number"]
-    fromstation = request.form["fromstation"]
-    tostation = request.form["tostation"]
+    from_dest = request.form["fromstation"]
+    to_dest = request.form["tostation"]
     dt = request.form["dt"]
-    seats = request.form["seats"]
-    train_name = request.form["train_name"]
+    seat_no = request.form["seats"]
+    airways = request.form["aiways"]
+    p_class = request.form["p_class"]
 
-    passenger = Passenger(name, number, fromstation, tostation, dt, seats, train_name)
+    passenger = Passenger(name, number, from_dest, to_dest, dt, seat_no, airways, p_class)
     db.session.add(passenger)
     db.session.commit()
 
@@ -141,24 +142,25 @@ def test():
         print(
             result.name,
             result.number,
-            result.fromstation,
-            result.tostation,
+            result.from_dest,
+            result.to_dest,
             result.dt,
-            result.seats,
-            result.train_name,
+            result.seat_no,
+            result.airways,
+            result.p_class
         )
-    train_n=request.form.get('train_name')    
+    plane_n=request.form.get('train_name')    
     requested_seats= int(request.form.get('seats'))
-    cursor.execute("SELECT avail_seats FROM trains WHERE train_name = %s", (train_n,))
+    cursor.execute("SELECT avail_seats FROM planes WHERE plane_no = %s", (plane_n,))
     
     res = cursor.fetchone()    
     if "BOOK" in request.form:
         available_seats=res[0]
         if requested_seats <= available_seats:
-         cursor.execute("UPDATE Trains SET avail_seats = avail_seats - %s WHERE train_name = %s",(requested_seats, train_n),)
+         cursor.execute("UPDATE planes SET avail_seats = avail_seats - %s WHERE plane_no = %s",(requested_seats, plane_n),)
          con.commit()
          return render_template(
-            "done.html", data=(name, fromstation, tostation, dt, seats, train_name)
+            "done.html", data=(name, from_dest, to_dest, dt, seat_no, airways)
          )
         else:
             return render_template("error.html")
