@@ -56,7 +56,7 @@
                   required onclick="setTo()">
               </div>
               <div class="field">
-                <select id="p_class" name="p_class" id="p_class">
+                <select id="p_class" name="p_class">
                   
                     <option value="BUSINESS CLASS">BUSINESS CLASS</option>
                     <option value="ECONOMY CLASS">ECONOMY CLASS</option>
@@ -66,10 +66,12 @@
               <div class="field">
                 <!-- <input type="number" id="train_no" name="train_no" placeholder="TRAIN NO"> -->
                 
-                <input type="number" value="1" id="seats" name="seats" placeholder="SEAT" readonly hidden>
+                <input type="number" max="1" min="1" value="1" id="seats" name="seats" hidden >
                 <br>  
-                <input type="text" name="airways" value="{{airways}}" readonly>
-                <input type="number" name="flight_n" value="{{flight_n}}" readonly>
+                <input type="text" name="airways" value="{{airways}}" >
+                <input type="number" name="flight_n" value="{{flight_n}}" >
+                <input type="number" name="seat_no" >
+
 
                 <!-- <select id="train_name" name="train_name">
                   {% for train in trains %}

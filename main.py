@@ -32,27 +32,27 @@ class Passenger(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40))
     number = db.Column(db.Integer)
-    p_class = db.Column(db.String(40))
     from_dest = db.Column(db.String(40))
     to_dest = db.Column(db.String(40))
+    p_class = db.Column(db.String(40))
+    seats = db.Column(db.Integer)
     airways = db.Column(db.String(40))
+    flight_n= db.Column(db.Integer)
     seat_no = db.Column(db.Integer)
     dt = db.Column(db.Date)
-    tm = db.Column(db.Time)
-    flight_n= db.column(db.Integer)
   
 
-    def __init__(self, name, number, p_class, from_dest, to_dest, airways, seat_no, dt, tm, flight_n):
+    def __init__(self, name, number, fromstation, tostation, p_class, seats, airways, flight_n, seat_no, dt):
         self.name = name
         self.number = number
-        self.p_class= p_class
-        self.from_dest = from_dest
-        self.to_dest = to_dest
+        self.from_dest = fromstation
+        self.to_dest = tostation  
+        self.p_class = p_class  
+        self.seats = seats
         self.airways = airways
-        self.seat_no = seat_no
-        self.dt = dt 
-        self.tm = tm
         self.flight_n = flight_n
+        self.seat_no = seat_no
+        self.dt = dt
         
 
 @app.route("/", methods=["post"])
@@ -132,13 +132,14 @@ def test():
     number = request.form["number"]
     from_dest = request.form["fromstation"]
     to_dest = request.form["tostation"]
-    dt = request.form["dt"]
-    seat_no = request.form["seats"]
-    airways = request.form["aiways"]
     p_class = request.form["p_class"]
+    seats = request.form["seats"]
+    airways = request.form["airways"]
     flight_n = request.form["flight_n"] 
+    seat_no = request.form["seat_no"]
+    dt = request.form["dt"]
 
-    passenger = Passenger(name, number, from_dest, to_dest, dt, seat_no, airways, p_class, flight_n)
+    passenger = Passenger(name, number, from_dest, to_dest, p_class, seats, airways, flight_n, seat_no, dt)
     db.session.add(passenger)
     db.session.commit()
 
@@ -149,11 +150,12 @@ def test():
             result.number,
             result.from_dest,
             result.to_dest,
-            result.dt,
-            result.seat_no,
-            result.airways,
             result.p_class,
-            result.flight_n
+            result.seats,
+            result.airways,
+            result.flight_n,
+            result.seat_no,
+            result.dt
         )
     plane_n=request.form.get('flight_n')    
     requested_seats= int(request.form.get('seats'))
