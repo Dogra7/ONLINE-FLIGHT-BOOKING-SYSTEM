@@ -30,7 +30,7 @@
                         <th>flight no</th>
                         <th>seat no</th>
                         <th>dt</th>
-                        <th>id</th>
+                        <!-- <th>id</th> -->
                         <th>Action</th> 
                         
                         
@@ -50,12 +50,12 @@
                         <td>{{ row[7] }}</td>
                         <td>{{ row[8] }}</td>
                         <td>{{ row[9] }}</td>
-                        <td>{{ row[10] }}</td>
+                        <!-- <td>{{ row[10] }}</td> -->
                         
                         <td>
                             <form method="post">
-                                <input type="hidden" name="" value="{{ row[1] }}">
-                                <input type="hidden" name="flight_n" value="{{ row[0] }}">  
+                           
+                                <input type="number" name="pl_n" value="{{ row[7] }}" hidden>  
                                 <button type="submit" name="ticketcancel" class="cancel-button">CANCEL TICKET</button>
                             </form>
                         </td>

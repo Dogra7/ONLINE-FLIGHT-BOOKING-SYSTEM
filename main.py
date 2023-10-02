@@ -77,7 +77,7 @@ def test():
 
     pname = request.form.get("p_name")
     plnno = request.form.get("a_no")
-    details ="i"
+    details =""
 
     if pname and plnno:
         cursor.execute("select * from passengers where name ILIKE %s and flight_n = %s",(pname, plnno,),)
@@ -103,6 +103,13 @@ def test():
             return render_template("ticket_cancellation.html")
         elif "search_t" in request.form:
             return render_template("ticket_cancellation.html", data = details)
+        elif "ticketcancel" in request.form:
+            planeno = request.form.get("pl_n")
+            cursor.execute("UPDATE planes SET avail_seats = avail_seats + 1 WHERE plane_no = %s", (planeno,),)
+            con.commit()
+            cursor.execute("delete from passengers where flight_n = %s", (planeno,),)
+            con.commit()
+            return render_template("a.html")
 
         if "ticket" in request.form:
             flight_n = request.form.get("flight_n")
