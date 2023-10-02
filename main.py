@@ -28,7 +28,7 @@ def home():
     return render_template("home.html")
 
 class Passenger(db.Model):
-    __tablename__ = "Passengers"
+    __tablename__ = "passengers"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40))
     number = db.Column(db.Integer)
@@ -59,10 +59,6 @@ class Passenger(db.Model):
 def test():
     avl = request.form.get("input_fld")
     frm = request.form.get("origin")
-    # cursor.execute("SELECT * from trains WHERE destination ILIKE %s OR origin ILIKE %s  ORDER BY train_name ASC",(avl, frm,))
-    # result = cursor.fetchall()
-    # cursor.execute("SELECT train_name from trains WHERE destination ILIKE %s OR origin ILIKE %s  ORDER BY train_name ASC",(avl, frm,))
-    # trains = cursor.fetchall()
 
     result = "a"
 
@@ -79,8 +75,17 @@ def test():
     else:
         result = ""
 
+    pname = request.form.get("p_name")
+    plnno = request.form.get("a_no")
+    details ="i"
+
+    if pname and plnno:
+        cursor.execute("select * from passengers where name ILIKE %s and flight_n = %s",(pname, plnno,),)
+        details = cursor.fetchall()
+
     cursor.execute("SELECT * FROM planes ORDER BY plane_no ASC")
     all = cursor.fetchall()
+
     if request.method == "POST":
 
         if "booking" in request.form:
@@ -93,6 +98,11 @@ def test():
         else:
             session.setdefault = ("input_fld", "")
             session.setdefault = ("origin", "")
+
+        if "t_cancel" in request.form:
+            return render_template("ticket_cancellation.html")
+        elif "search_t" in request.form:
+            return render_template("ticket_cancellation.html", data = details)
 
         if "ticket" in request.form:
             flight_n = request.form.get("flight_n")
