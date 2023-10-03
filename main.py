@@ -78,9 +78,14 @@ def test():
     pname = request.form.get("p_name")
     plnno = request.form.get("a_no")
     details =""
-
     if pname and plnno:
         cursor.execute("select * from passengers where name ILIKE %s and flight_n = %s",(pname, plnno,),)
+        details = cursor.fetchall()    
+    elif pname :
+        cursor.execute("select * from passengers where name ILIKE %s ",(pname,),)
+        details = cursor.fetchall()
+    elif plnno:
+        cursor.execute("select * from passengers where flight_n = %s",(plnno,),)
         details = cursor.fetchall()
 
     cursor.execute("SELECT * FROM planes ORDER BY plane_no ASC")
