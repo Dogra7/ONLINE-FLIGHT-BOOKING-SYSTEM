@@ -21,6 +21,7 @@ con = psycopg2.connect(
     host="127.0.0.1",
     port="5432",
 )
+
 cursor = con.cursor()
 
 @app.route("/")
@@ -64,7 +65,7 @@ def test():
 
     if avl and frm:
         cursor.execute(
-            "SELECT * from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_name ASC",(avl,frm,),)
+            "SELECT * from planes WHERE destination ILIKE %s AND origin ILIKE %s AND avail_seats > 0  ORDER BY plane_no ASC",(avl,frm,),)
         result = cursor.fetchall()
     elif avl:
         cursor.execute("SELECT * from planes WHERE destination ILIKE %s AND avail_seats > 0 ORDER BY plane_no ASC",(avl,),)
@@ -95,7 +96,7 @@ def test():
 
         if "booking" in request.form:
             msg = " "
-            return render_template("searchtrains.html", msg=msg)
+            return render_template("searchplanes.html", msg=msg)
 
         if request.method == "POST":
             session["input_fld"] = request.form.get("input_fld")
@@ -105,9 +106,15 @@ def test():
             session.setdefault = ("origin", "")
 
         if "t_cancel" in request.form:
-            return render_template("ticket_cancellation.html")
+            abc =""
+            return render_template("ticket_cancellation.html", abc=abc)
         elif "search_t" in request.form:
-            return render_template("ticket_cancellation.html", data = details)
+            if len(details) == 0:
+
+                message = "FLIGHTS NOT AVAILABLE"
+                return render_template("ticket_cancellation.html", message=message)
+            else:
+                return render_template("ticket_cancellation.html", data = details)
         elif "ticketcancel" in request.form:
             planeno = request.form.get("pl_n")
             cursor.execute("UPDATE planes SET avail_seats = avail_seats + 1 WHERE plane_no = %s", (planeno,),)
@@ -127,7 +134,7 @@ def test():
             return render_template("home.html")
 
         if "trains" in request.form:
-            return render_template("trainschedule.html", data=all)
+            return render_template("planeschedule.html", data=all)
 
         # if avl is None:
 
@@ -137,9 +144,9 @@ def test():
             if len(result) == 0:
 
                 message = "FLIGHTS NOT AVAILABLE"
-                return render_template("searchtrains.html", message=message)
+                return render_template("searchplanes.html", message=message)
             else:
-                return render_template("searchtrains.html", data=result)
+                return render_template("searchplanes.html", data=result)
     
         # Get the form data
         # train_name = request.form["train_name"]
