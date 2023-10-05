@@ -69,8 +69,8 @@
                 <input type="number" max="1" min="1" value="1" id="seats" name="seats" hidden >
                 <br>  
                 <input type="text" name="airways" value="{{airways}}" >
-                <input type="number" name="flight_n" value="{{flight_n}}" >
-                <input type="number" name="seat_no"  required>
+                <input type="number" name="flight_n" value="{{flight_n}}" readonly>
+                <input type="number" name="seat_no" id="seat_no" value="{{ seat_no }}" required hidden>
 
 
 
@@ -89,6 +89,7 @@
                 <button type="BOOK" name="BOOK" id="BOOK">BOOK </button>
               
               </div>
+
 
 
             </form>

@@ -24,6 +24,8 @@ con = psycopg2.connect(
 
 cursor = con.cursor()
 
+current_seat_number = 2100
+
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -122,13 +124,17 @@ def test():
             cursor.execute("delete from passengers where flight_n = %s", (planeno,),)
             con.commit()
             return render_template("a.html")
+        
 
         if "ticket" in request.form:
+            global current_seat_number
+            
+            current_seat_number += 1
             flight_n = request.form.get("flight_n")
             session["selected_number"] = flight_n
             airways = request.form.get("airways")
             session["selected_flight"] = airways
-            return render_template("booking.html", airways=airways, flight_n=flight_n)
+            return render_template("booking.html", airways=airways, flight_n=flight_n, seat_no=current_seat_number)
         
         if "home" in request.form:
             return render_template("home.html")
