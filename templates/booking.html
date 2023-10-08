@@ -27,20 +27,10 @@
                   required>
                 
               </div>
-              <!-- <div class="field">
-                <input type="number" name="age" id="age" placeholder="AGE"
-                  required>
-              </div>
+
 
               <div class="field">
-                <input type="gender" name="gender" id="gender"
-                  placeholder="GENDER" required>
-                
-              </div> -->
-
-              <div class="field">
-                <input type="number" min="0" name="number" id="numb"
-                  placeholder="MOBILE NUMBER" required>
+                <input type="number"  name="number" id="numb" size="10" min="0" maxlength="10" placeholder="MOBILE NUMBER" required>
               </div>
 
 
@@ -57,24 +47,26 @@
                   <br>
               </div>
               <div class="field">
-                <select id="p_class" name="p_class">
-                  
+                <select id="p_class" name="p_class" onchange="updatePrice()">
+                    <option value="default">SELECT CLASS</option>
                     <option value="BUSINESS CLASS">BUSINESS CLASS</option>
                     <option value="ECONOMY CLASS">ECONOMY CLASS</option>
 
                 </select>
                 </div>
+                <div class="field">
+                <input type="text"  id="price" name="price" placeholder="PRICE" readonly  >
+              </div> 
               <div class="field">
                 
                 <input type="number" max="1" min="1" value="1" id="seats" name="seats" hidden >
                 <br>  
-                <input type="text" name="airways" value="{{airways}}" >
+                <input type="text" name="airways" value="{{airways}}" readonly >
                 <br>
                 <input type="number" name="flight_n" value="{{flight_n}}" readonly>
                 <br>
                 <input type="number" name="seat_no" id="seat_no" value="{{ seat_no }}" required hidden>
-
-
+                <input type="text" name="brdng" id="brdng" value="{{ brdng }}" hidden>
 
               </div>
 

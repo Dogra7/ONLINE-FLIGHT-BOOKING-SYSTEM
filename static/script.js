@@ -24,6 +24,20 @@ function setTo() {
 }
 
 
+function updatePrice(){
+    var pClass = document.getElementById("p_class").value;
+    var priceField = document.getElementById("price");
+
+    if (pClass === "BUSINESS CLASS") {
+        priceField.value = '15000Rs';
+    } else if (pClass === "ECONOMY CLASS") {
+        priceField.value = '7000Rs';
+    }
+    else{
+        priceField.value = '';
+    }
+}
+
 // document.getElementById("bookingForm").onsubmit = function(event) 
 // {
 //    // Prevent the form from submitting immediately

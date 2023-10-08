@@ -53,7 +53,5 @@ border-radius: 12px;
 }
 
 .book button:active{
-    
-    
     transform: translateY(4px);
 }

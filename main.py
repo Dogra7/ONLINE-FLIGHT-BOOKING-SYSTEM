@@ -43,9 +43,10 @@ class Passenger(db.Model):
     flight_n= db.Column(db.Integer)
     seat_no = db.Column(db.Integer)
     dt = db.Column(db.Date)
+    brdng = db.Column(db.String(40))
   
 
-    def __init__(self, name, number, fromstation, tostation, p_class, seats, airways, flight_n, seat_no, dt):
+    def __init__(self, name, number, fromstation, tostation, p_class, seats, airways, flight_n, seat_no, dt, brdng):
         self.name = name
         self.number = number
         self.from_dest = fromstation
@@ -56,6 +57,7 @@ class Passenger(db.Model):
         self.flight_n = flight_n
         self.seat_no = seat_no
         self.dt = dt
+        self.brdng = brdng
         
 
 @app.route("/", methods=["post"])
@@ -113,15 +115,16 @@ def test():
         elif "search_t" in request.form:
             if len(details) == 0:
 
-                message = "FLIGHTS NOT AVAILABLE"
+                message = "TICKET NOT FOUND"
                 return render_template("ticket_cancellation.html", message=message)
             else:
                 return render_template("ticket_cancellation.html", data = details)
         elif "ticketcancel" in request.form:
+            p_nm = request.form.get("p_nm")
             planeno = request.form.get("pl_n")
-            cursor.execute("UPDATE planes SET avail_seats = avail_seats + 1 WHERE plane_no = %s", (planeno,),)
+            cursor.execute("UPDATE planes SET avail_seats = avail_seats + 1 WHERE plane_no = %s ", (planeno, ),)
             con.commit()
-            cursor.execute("delete from passengers where flight_n = %s", (planeno,),)
+            cursor.execute("delete from passengers where flight_n = %s and name ilike %s", (planeno, p_nm,),)
             con.commit()
             return render_template("a.html")
         
@@ -134,7 +137,9 @@ def test():
             session["selected_number"] = flight_n
             airways = request.form.get("airways")
             session["selected_flight"] = airways
-            return render_template("booking.html", airways=airways, flight_n=flight_n, seat_no=current_seat_number)
+            brdng = request.form.get("brdng")
+            session["selected_brdng"] = brdng
+            return render_template("booking.html", brdng=brdng, airways=airways, flight_n=flight_n, seat_no=current_seat_number)
         
         if "home" in request.form:
             return render_template("home.html")
@@ -153,7 +158,6 @@ def test():
                 return render_template("searchplanes.html", message=message)
             else:
                 return render_template("searchplanes.html", data=result)
-    
         # Get the form data
         # train_name = request.form["train_name"]
         # num_seats = request.form["seats"]
@@ -173,8 +177,9 @@ def test():
     flight_n = request.form["flight_n"] 
     seat_no = request.form["seat_no"]
     dt = request.form["dt"]
+    brdng = request.form["brdng"]
 
-    passenger = Passenger(name, number, from_dest, to_dest, p_class, seats, airways, flight_n, seat_no, dt)
+    passenger = Passenger(name, number, from_dest, to_dest, p_class, seats, airways, flight_n, seat_no, dt, brdng)
     db.session.add(passenger)
     db.session.commit()
 
@@ -190,12 +195,14 @@ def test():
             result.airways,
             result.flight_n,
             result.seat_no,
-            result.dt
+            result.dt,
+            result.brdng
         )
+
     plane_n=request.form.get('flight_n')    
     requested_seats= int(request.form.get('seats'))
     cursor.execute("SELECT avail_seats FROM planes WHERE plane_no = %s", (plane_n,))
-    
+   
     res = cursor.fetchone()    
     if "BOOK" in request.form:
         available_seats=res[0]
@@ -203,10 +210,11 @@ def test():
          cursor.execute("UPDATE planes SET avail_seats = avail_seats - %s WHERE plane_no = %s",(requested_seats, plane_n),)
          con.commit()
          return render_template(
-            "done.html", data=(name, from_dest, to_dest, dt, seat_no, airways, p_class, flight_n)
+            "done.html", data=(name, from_dest, to_dest, dt, seat_no, airways, p_class, flight_n, brdng)
          )
         else:
             return render_template("error.html")
+        
         
 if __name__ == "__main__":
     app.run(debug=True)

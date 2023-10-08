@@ -10,7 +10,7 @@
 <body>
     <form  method="POST">
     <div class = "title">
-        <h1> RAILWAY RESERVATION SYSTEM </h1>
+        <h1> FLIGHT BOOKING SYSTEM </h1>
     </div>
     
     <div class="done">
@@ -20,28 +20,36 @@
      <div class="title1">     
    <h2>TICKET INFORMATION</h2>
      </div>
-   <div class="data">
-    <h3>
-     <p id="namep">NAME: {{data[0]}}</p>   
-     <p>AIRWAYS: {{data[5]}}</p>
-     <p id="fstn">FROM : {{data[1]}} </p> 
-     <p id="tstn">TO : {{data[2]}}  </p> 
-     <p>SEAT NO: {{data[4]}}</p> 
-     <p>FLIGHT NO: {{data[7]}}</p>
-     <p>DATE: {{data[3]}} </p>
+     <div class="data">
+        <h3>
+            <div class="part-container">
+                <div class="part1">
+                    <p id="namep">NAME: {{data[0]}}</p>
+                    <p>FLIGHT NO:{{data[7]}}</p>
+                    <p>SEAT NO: {{data[4]}}</p>
+                    <p>AIRWAYS:{{data[5]}}</p>
+                </div>
+                <div class="part2">
+                    <p id="fstn">FROM : {{data[1]}} </p>
+                    <p id="tstn">TO : {{data[2]}}  </p>
+                    <p>DATE: {{data[3]}} </p>
+                    <p>DEPART TIME : {{data[8]}}</p>
+                </div>
+            </div>
+        </h3>
+    </div>
      
      </h3>
          
 
-        </div>
         <div class="home">
             <button type="home" name="home"><a href="http://127.0.0.1:5000/">HOME</a></button>
-             </div>
+        </div>
    <br>
   
    <!--<button type="viewticket" name="viewticket"><a>VIEW TICKET</a> </button>-->
    <script src="/static/script.js"></script>
-    </div>
+    
 </form>
 </body>
 </html>
