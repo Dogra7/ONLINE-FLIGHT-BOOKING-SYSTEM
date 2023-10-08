@@ -1,0 +1,82 @@
+.boarding-pass {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.boarding-pass .overlap-wrapper {
+  background-color: #ffffff;
+  width: 2100px;
+  height: 900px;
+}
+
+.boarding-pass .overlap {
+  position: relative;
+  height: 900px;
+}
+
+.boarding-pass .overlap-group {
+  position: absolute;
+  width: 2100px;
+  height: 900px;
+  top: 0;
+  left: 0;
+}
+
+.boarding-pass .rectangle {
+  position: absolute;
+  width: 2100px;
+  height: 150px;
+  top: 0;
+  left: 0;
+  border-radius: 30px 30px 0px 0px;
+  background: linear-gradient(180deg, rgba(0, 78, 137, 0.67) 18.23%, rgb(26, 101, 158) 100%);
+}
+
+.boarding-pass .text-wrapper {
+  position: absolute;
+  width: 600px;
+  height: 90px;
+  top: 29px;
+  left: 1484px;
+  font-family: "Ubuntu-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 60px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+
+.boarding-pass .line {
+  position: absolute;
+  width: 5px;
+  height: 900px;
+  top: 0;
+  left: 1460px;
+}
+
+.boarding-pass .div {
+  position: absolute;
+  width: 700px;
+  height: 90px;
+  top: 29px;
+  left: 207px;
+  font-family: "Ubuntu-Medium", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 70px;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+
+.boarding-pass .barcode {
+  position: absolute;
+  width: 104px;
+  height: 632px;
+  top: 202px;
+  left: 58px;
+  object-fit: cover;
+}

@@ -54,6 +54,7 @@
                 <input type="text" pattern="[A-Za-z\s]+" name="tostation" id="to"
                   placeholder="TO"
                   required onclick="setTo()">
+                  <br>
               </div>
               <div class="field">
                 <select id="p_class" name="p_class">
@@ -68,7 +69,9 @@
                 <input type="number" max="1" min="1" value="1" id="seats" name="seats" hidden >
                 <br>  
                 <input type="text" name="airways" value="{{airways}}" >
+                <br>
                 <input type="number" name="flight_n" value="{{flight_n}}" readonly>
+                <br>
                 <input type="number" name="seat_no" id="seat_no" value="{{ seat_no }}" required hidden>
 
 
@@ -104,27 +107,27 @@
           <div class="map">
             <img src="/static/a.png" usemap="#image_map">
             <map name="image_map">
-              <area class="stn" id="csmt" coords="379,587,399,603" shape="rect">
-              <area class="stn" id="goa"  coords="409,709,431,731" shape="rect">
-                <area class="stn" id="cochin"  coords="493,885,507,898" shape="rect">
-                  <area class="stn" id="salem"  coords="545,831,566,847" shape="rect">
-                    <area class="stn" id="Vadodara"  coords="392,473,409,493" shape="rect">
-                      <area class="stn" id="sardar vallabh bhai patel"  coords="375,452,388,463" shape="rect">
-                      <area class="stn" id="biju patnaik"  coords="796,544,812,564" shape="rect">
-                      <area class="stn" id="lal bahadur shastri"  coords="700,365,720,381" shape="rect">
-                      <area class="stn" id="gaya"  coords="766,391,788,407" shape="rect">
-                      <area class="stn" id="jodhpur"  coords="384,336,404,349" shape="rect">
-                      <area class="stn" id="tribhuvan"  coords="782,285,800,301" shape="rect">
-                      <area class="stn" id="jaipur"  coords="473,313,490,332" shape="rect">
-                      <area class="stn" id="hindustan aeronautics"  coords="533,792,553,809" shape="rect">
-                      <area class="stn" id="tripura"  coords="945,425,960,437" shape="rect">
-                      <area class="stn" id="indira gandhi int"  coords="515,253,538,270" shape="rect">
-                      <area class="stn" id="trivandrum"  coords="511,939,526,951" shape="rect">
-                      <area class="stn" id="shimla"  coords="513,157,535,176" shape="rect">
-                      <area class="stn" id="kullu"  coords="517,125,538,147" shape="rect">
-                      <area class="stn" id="jammu"  coords="441,94,461,117" shape="rect">
-                      <area class="stn" id="srinagar"  coords="438,48,461,65" shape="rect">
-                      <area class="stn" id="leh"  coords="529,39,548,60" shape="rect">
+              <area class="stn" id="MUMBAI" coords="379,587,399,603" shape="rect">
+              <area class="stn" id="GOA"  coords="409,709,431,731" shape="rect">
+                <area class="stn" id="COCHIN"  coords="493,885,507,898" shape="rect">
+                  <area class="stn" id="SALEM"  coords="545,831,566,847" shape="rect">
+                    <area class="stn" id="VADODARA"  coords="392,473,409,493" shape="rect">
+                      <area class="stn" id="AHMEDABAD"  coords="375,452,388,463" shape="rect">
+                      <area class="stn" id="BHUBANESHWAR"  coords="796,544,812,564" shape="rect">
+                      <area class="stn" id="VARANASI"  coords="700,365,720,381" shape="rect">
+                      <area class="stn" id="GAYA"  coords="766,391,788,407" shape="rect">
+                      <area class="stn" id="JODHPUR"  coords="384,336,404,349" shape="rect">
+                      <area class="stn" id="TRIBHUVAN"  coords="782,285,800,301" shape="rect">
+                      <area class="stn" id="JAIPUR"  coords="473,313,490,332" shape="rect">
+                      <area class="stn" id="BANGLORE"  coords="533,792,553,809" shape="rect">
+                      <area class="stn" id="TRIPURA"  coords="945,425,960,437" shape="rect">
+                      <area class="stn" id="DELHI"  coords="515,253,538,270" shape="rect">
+                      <area class="stn" id="TRIVANDRUM"  coords="511,939,526,951" shape="rect">
+                      <area class="stn" id="SHIMMLA"  coords="513,157,535,176" shape="rect">
+                      <area class="stn" id="KULLU"  coords="517,125,538,147" shape="rect">
+                      <area class="stn" id="JAMMU"  coords="441,94,461,117" shape="rect">
+                      <area class="stn" id="SRINAGAR"  coords="438,48,461,65" shape="rect">
+                      <area class="stn" id="LEH"  coords="529,39,548,60" shape="rect">
             
             </map>
           </div>
